@@ -1,0 +1,15 @@
+{
+    "dockerComposeFile": "docker-compose.yml",
+    "service": "workspace",
+    "secrets": {
+        "EGGPLANT_ACCEPT_EULA": {
+            "description": "Set to true to agree to the Keysight End-User License Agreement."
+        },
+        "EGGPLANT_ACCEPT_PRIVACY_AGREEMENT": {
+            "description": "Set to true to indicate your acknowledgement of the Keysight Software Privacy Notice."
+        },
+        "EGGPLANT_LICENSE_KEY": {
+            "description": "Your Eggplant license key."
+        }
+    }
+}

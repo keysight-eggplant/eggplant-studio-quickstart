@@ -1,0 +1,20 @@
+services:
+  workspace:
+    image: "mcr.microsoft.com/devcontainers/base:ubuntu-22.04"
+    volumes:
+      - ..:/workspace
+      - /var/run/docker.sock:/var/run/docker.sock
+    command: sleep infinity
+
+  # Hosts the Eggplant Fusion Engine in Debug Adapter mode in a service container
+  # called fusionengine
+  fusionengine:
+    image: "quay.io/eggplantsoftware/fusion-engine-ubi8:23.5.102"
+    volumes:
+      - ..:/workspace
+    command: -drivePort 5400 -dapport 4711 -DisableEACPolling YES
+    environment:
+      EGGPLANT_ACCEPT_EULA: ${EGGPLANT_ACCEPT_EULA}
+      EGGPLANT_ACCEPT_PRIVACY_AGREEMENT: ${EGGPLANT_ACCEPT_PRIVACY_AGREEMENT}
+      EGGPLANT_LICENSE_KEY: ${EGGPLANT_LICENSE_KEY}
+    network_mode: "service:workspace"

@@ -11,5 +11,10 @@
         "EGGPLANT_LICENSE_KEY": {
             "description": "Your Eggplant license key."
         }
+    },
+    "customizations": {
+        "vscode": {
+            "extensions": [ "keysight-technologies.eggplantteststudio" ]
+        }
     }
 }

@@ -1,8 +1,11 @@
 services:
   workspace:
-    image: "mcr.microsoft.com/devcontainers/base:ubuntu-22.04"
+    build:
+      dockerfile: Dockerfile
+      context: .
     volumes:
       - ..:/workspace
+      - vscode:/home/vscode
       - /var/run/docker.sock:/var/run/docker.sock
     command: sleep infinity
 
@@ -12,9 +15,13 @@ services:
     image: "quay.io/eggplantsoftware/fusion-engine-ubi8:23.5.102"
     volumes:
       - ..:/workspace
+      - vscode:/home/vscode
     command: -drivePort 5400 -dapport 4711 -DisableEACPolling YES
     environment:
       EGGPLANT_ACCEPT_EULA: ${EGGPLANT_ACCEPT_EULA}
       EGGPLANT_ACCEPT_PRIVACY_AGREEMENT: ${EGGPLANT_ACCEPT_PRIVACY_AGREEMENT}
       EGGPLANT_LICENSE_KEY: ${EGGPLANT_LICENSE_KEY}
     network_mode: "service:workspace"
+
+volumes:
+  vscode:

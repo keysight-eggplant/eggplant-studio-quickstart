@@ -1,6 +1,8 @@
 services:
   workspace:
-    image: "mcr.microsoft.com/devcontainers/base:ubuntu-22.04"
+    build:
+      dockerfile: Dockerfile
+      context: .
     volumes:
       - ..:/workspace
       - /var/run/docker.sock:/var/run/docker.sock

@@ -1,0 +1,16 @@
+name: CI
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  linux:
+    name: Test
+    runs-on: ubuntu-latest
+    container: quay.io/eggplantsoftware/fusion-engine-ubi8:23.5.102
+
+    steps:
+      - uses: actions/checkout@v4
+      - name: Run script
+        run: Demo.suite/Scripts/Sandbox.script

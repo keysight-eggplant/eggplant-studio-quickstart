@@ -1,6 +1,12 @@
 # Eggplant Studio Quick Start Guide for GitHub Codespaces
 
-You can use this Quick Start guide get started with Eggplant within minutes, using GitHub Codespaces.
+You can use this Quick Start guide get started with Eggplant Studio within minutes, using GitHub Codespaces.
+
+## System requirements for GitHub Codespaces
+
+Eggplant Studio uses the Fusion Engine, which ships as part of Eggplant Functional, as its test execution engine.
+
+We recommend your GitHub Codespaces meet the published [System Recommendations](https://docs.eggplantsoftware.com/studio/epf-prerequisites/) for Eggplant Functional.  The 4-core machine type meets the System Recommendations.
 
 ## Additional information
 

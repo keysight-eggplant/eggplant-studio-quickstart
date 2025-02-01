@@ -23,5 +23,16 @@ services:
       EGGPLANT_LICENSE_KEY: ${EGGPLANT_LICENSE_KEY}
     network_mode: "service:workspace"
 
+  # Hosts the Eggplant Gateway in a service container
+  # called epgw
+  epgw:
+    build:
+      dockerfile: Dockerfile.epgw
+      context: .
+    command: service
+    environment:
+      EPGW_USERNAME: ${GITHUB_USER}
+      EPGW_PASSWORD: ${GITHUB_TOKEN}
+    network_mode: "service:workspace"
 volumes:
   vscode:

@@ -15,7 +15,7 @@ ENV ASPNETCORE_Kestrel__Endpoints__Http__Url "http://0.0.0.0:8080"
 RUN ln -s /opt/epgw/epgw /usr/local/bin/epgw
 WORKDIR /root
 
-RUN epgw add demo --name demo
+COPY epgw.tutorial.json .
 
 EXPOSE 8080
 

@@ -8,6 +8,10 @@ services:
       - vscode:/home/vscode
       - /var/run/docker.sock:/var/run/docker.sock
     command: sleep infinity
+    environment:
+      EPGW_URL: http://localhost:8080
+      EPGW_USERNAME: ${GITHUB_USER}
+      EPGW_PASSWORD: ${GITHUB_TOKEN}
 
   # Hosts the Eggplant Fusion Engine in Debug Adapter mode in a service container
   # called fusionengine

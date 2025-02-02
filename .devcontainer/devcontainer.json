@@ -12,6 +12,7 @@
             "description": "Your Eggplant license key."
         }
     },
+    "forwardPorts": [ 8080 ],
     "customizations": {
         "vscode": {
             "extensions": [ "keysight-technologies.eggplantteststudio" ]

@@ -1,0 +1,14 @@
+{
+    "ConnectionName": "sauce-browser",
+    "GatewayName": "sauce-browser",
+    "Capabilities": {
+      "sauce:options": {
+        "url": "https://www.keysight.com/be/en/home.html",
+        "screenResolution": "1400x1050",
+        "name": "sauce-browser"
+      },
+      "platformName": "Windows 10",
+      "browserName": "chrome",
+      "browserVersion": "98"
+    }
+}

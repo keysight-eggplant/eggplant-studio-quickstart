@@ -1,0 +1,8 @@
+Click text:AGREE
+Click text:CLOSE
+
+Click Image:"SearchIcon"
+
+TypeText "Software Quality Engineering"
+Wait 10
+CaptureScreen SQE

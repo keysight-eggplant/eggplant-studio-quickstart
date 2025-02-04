@@ -1,0 +1,8 @@
+{
+    "ConnectionName": "sauce-device",
+    "GatewayName": "sauce-device",
+    "Capabilities": {
+      "appium:deviceName": "Samsung Galaxy S.*",
+      "platformName": "Android"
+    }
+}

@@ -34,9 +34,14 @@ services:
       dockerfile: Dockerfile.epgw
       context: .
     command: service
+    volumes:
+      - ../connections:/root
     environment:
       EPGW_USERNAME: ${GITHUB_USER}
       EPGW_PASSWORD: ${GITHUB_TOKEN}
+      SAUCE_USER: ${SAUCE_USER}
+      SAUCE_API_KEY: ${SAUCE_API_KEY}
+      SAUCE_REGION: ${SAUCE_REGION}
     network_mode: "service:workspace"
 volumes:
   vscode:

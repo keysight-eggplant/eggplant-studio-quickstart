@@ -1,0 +1,66 @@
+name: CI
+on:
+  push:
+jobs:
+  run-script:
+    runs-on: ubuntu-latest
+    container:
+      image: ghcr.io/keysight-eggplant/eggplant-studio-quickstart:features-docker
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install license
+        run: |
+          defaults write Eggplant AcceptEULA YES
+          defaults write Eggplant AcceptPrivacyAgreement YES
+          defaults write Eggplant GSBackend libgnustep-headless
+          defaults write Eggplant BonjourDiscoveryEnabled false
+          runscript -LicenseKey "${EGGPLANT_LICENSE_KEY}"
+        env:
+          EGGPLANT_LICENSE_KEY: ${{ secrets.EGGPLANT_LICENSE_KEY }}
+      - name: Run script
+        run: |
+          /usr/GNUstep/Local/Applications/Eggplant.app/Resources/epgw/x64/bin/epgw runscript browser ../Eggplant.suite/Scripts/FindEggplant.script --results-file ../Eggplant.suite/Results/junit-report.xml
+        env:
+          SAUCE_API_KEY: ${{ secrets.SAUCE_API_KEY }}
+          SAUCE_REGION: ${{ secrets.SAUCE_REGION }}
+          SAUCE_USER: ${{ secrets.SAUCE_USER }}
+        working-directory: connections
+      - uses: actions/upload-artifact@v4
+        with:
+          name: test-results-${{ github.run_id }}
+          path: Eggplant.suite/Results
+
+  testrail:
+    runs-on: ubuntu-latest
+    container:
+      image: ubuntu:jammy
+    needs: [ run-script ]
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+      - uses: actions/download-artifact@v4
+        with:
+          name: test-results-${{ github.run_id }}
+          path: Eggplant.suite/Results/
+      - name: Install Python
+        run: |
+          apt-get update
+          apt-get install -y python3 python3-pip
+      - name: Install TestRail CLI
+        run: |
+          pip3 install trcli
+      - name: Upload to TestRail
+        run: >
+          trcli -y
+          -h https://testplant.testrail.com/
+          --project "temp"
+          -u ${TESTRAIL_USER}
+          -k ${TESTRAIL_API_KEY}
+          parse_junit
+          --title "Automated Tests from GitHub workflow"
+          --run-description ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
+          -f "Eggplant.suite/Results/junit-report.xml"
+          --result-fields "version:${{ github.run_id }}"
+        env:
+          TESTRAIL_USER: ${{ secrets.TESTRAIL_USER }}
+          TESTRAIL_API_KEY: ${{ secrets.TESTRAIL_API_KEY }}

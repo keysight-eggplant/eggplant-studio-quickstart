@@ -34,6 +34,8 @@ services:
       dockerfile: Dockerfile.epgw
       context: .
     command: service
+    volumes:
+      - ../connections:/root
     environment:
       EPGW_USERNAME: ${GITHUB_USER}
       EPGW_PASSWORD: ${GITHUB_TOKEN}

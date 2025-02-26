@@ -6,7 +6,6 @@ RUN apt-get update \
 
 WORKDIR /root
 
-COPY epgw.tutorial.json .
 ENV ASPNETCORE_Kestrel__Endpoints__Http__Url "http://0.0.0.0:8080"
 
 EXPOSE 8080

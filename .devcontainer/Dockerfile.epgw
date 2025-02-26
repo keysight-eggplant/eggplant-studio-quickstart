@@ -1,21 +1,13 @@
-FROM ubuntu:jammy
+FROM quay.io/eggplantsoftware/epgw:25.2.1-0054
 
 RUN apt-get update \
 && apt-get install -y --no-install-recommends libturbojpeg libavformat58 libswscale5 curl ca-certificates \
 && rm -rf /var/lib/apt/lists/*
 
-RUN curl -X GET https://assets.eggplantsoftware.com/gateway/epgw.25.1.5-0111.linux-x64.tar.gz --output /tmp/epgw.25.1.5-0111.linux-x64.tar.gz \
-&& mkdir -p /opt/epgw/ \
-&& cd /opt/epgw \
-&& tar xvzf /tmp/epgw.25.1.5-0111.linux-x64.tar.gz
-
-ENV EPGW_LOGS "/var/log/epgw"
-ENV ASPNETCORE_Kestrel__Endpoints__Http__Url "http://0.0.0.0:8080"
-
-RUN ln -s /opt/epgw/epgw /usr/local/bin/epgw
 WORKDIR /root
 
 COPY epgw.tutorial.json .
+ENV ASPNETCORE_Kestrel__Endpoints__Http__Url "http://0.0.0.0:8080"
 
 EXPOSE 8080
 

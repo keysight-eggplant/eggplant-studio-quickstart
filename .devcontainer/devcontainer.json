@@ -13,6 +13,7 @@
         }
     },
     "forwardPorts": [ 8080 ],
+    "postAttachCommand": "./.devcontainer/post-attach.sh",
     "customizations": {
         "vscode": {
             "extensions": [ "keysight-technologies.eggplantteststudio" ]

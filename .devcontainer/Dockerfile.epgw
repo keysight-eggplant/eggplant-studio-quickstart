@@ -1,4 +1,4 @@
-FROM quay.io/eggplantsoftware/epgw:25.2.1-0054
+FROM quay.io/eggplantsoftware/epgw:25.3.2-0046
 
 RUN apt-get update \
 && apt-get install -y --no-install-recommends libturbojpeg libavformat58 libswscale5 curl ca-certificates \

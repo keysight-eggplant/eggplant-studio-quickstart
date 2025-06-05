@@ -16,7 +16,7 @@ services:
   # Hosts the Eggplant Fusion Engine in Debug Adapter mode in a service container
   # called fusionengine
   fusionengine:
-    image: "quay.io/eggplantsoftware/fusion-engine-ubi8:25.1.100"
+    image: "quay.io/eggplantsoftware/fusion-engine-ubi8:25.2.101"
     volumes:
       - ..:/workspace
       - vscode:/home/vscode

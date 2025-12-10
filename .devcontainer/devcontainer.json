@@ -1,6 +1,7 @@
 {
     "dockerComposeFile": "docker-compose.yml",
     "service": "workspace",
+    "workspaceFolder": "/workspace.suite",
     "secrets": {
         "EGGPLANT_ACCEPT_EULA": {
             "description": "Set to true to agree to the Keysight End-User License Agreement."

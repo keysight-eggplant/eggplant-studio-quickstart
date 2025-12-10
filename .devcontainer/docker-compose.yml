@@ -4,7 +4,7 @@ services:
       dockerfile: Dockerfile
       context: .
     volumes:
-      - ..:/workspace
+      - ..:/workspace.suite
       - vscode:/home/vscode
       - /var/run/docker.sock:/var/run/docker.sock
     command: sleep infinity
@@ -19,7 +19,7 @@ services:
   fusionengine:
     image: "quay.io/eggplantsoftware/fusion-engine:25.4.0"
     volumes:
-      - ..:/workspace
+      - ..:/workspace.suite
       - vscode:/home/vscode
     command: -drivePort 5400 -dapport 4711 -DisableEACPolling YES
     environment:

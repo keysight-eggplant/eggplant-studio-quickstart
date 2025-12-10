@@ -1,0 +1,11 @@
+{
+  "servers": {
+    "eggplant-mcp": {
+      "type": "http",
+      "url": "http://localhost:8080/mcp",
+      "headers": {
+        "Authorization": "Basic ${env:EPGW_AUTHENTICATION}"
+      }
+    }
+  }
+}

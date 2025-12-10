@@ -1,0 +1,37 @@
+// Step 1 - Zero state
+Click Image:"Icons/Favorites/Favorites" // Icon
+waitfor 20, Image: "Icons/Favorites/Favorites_Selected"// Image comparison
+
+// Step 2 -- verify Contacts screen
+Click Image:"Icons/Contacts/Contacts"
+WaitFor 20, Image:"Icons/Contacts/Contacts_Selected"
+assert that ImageFound(0, text: "Not a real phone, but you can") // OCR comparison
+
+// Step 3 -- verify Favorites screen
+Click Image:"Icons/Favorites/Favorites"
+WaitFor 20, Image:"Icons/Favorites/Favorites_Selected"
+assert that ImageFound(0, text: "Still not a real phone") // OCR comparison
+
+// Step 4 -- verify History screen
+Click Image:"Icons/History/History"
+WaitFor 20, Image:"Icons/History/History_Selected"
+assert that ImageFound(0, text: "Totally fake") // OCR comparison
+
+// Step 5 -- verify Downloads screen
+Click Image:"Icons/Downloads/Downloads"
+WaitFor 20, Image:"Icons/Downloads/Downloads_Selected"
+assert that ImageFound(0, text: "The phone is a lie") // OCR comparison
+
+// Step 6 -- Verify battery is at 100% charge
+if ImageFound(ImageName:"Icons/Battery/Battery_100", waitFor:2, SearchRectangle:[239,1,426,207]) // Image comparison
+	LogSuccess "Battery Image of 100% found on device"
+else
+	LogError "Battery Image of 100% not found on device"
+end if
+
+// Step 7 -- Verify the clock on the device is correct
+put "12:35" into ExpectedTime -- modify this time to see the assert fail
+set timePattern to <2 digits, ":", 2 digits> // build the format for the pattern matching of the time of day
+log Imagelocation(text: timePattern) // OCR search
+put the foundImageInfo's FoundText into SUTTime
+assert that SUTTime is ExpectedTime // OCR comparision using pattern matching

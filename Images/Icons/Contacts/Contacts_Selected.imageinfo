@@ -1,0 +1,21 @@
+﻿{
+    CaptureDate = "2023-09-01 19:10:15 +0000";
+    CaptureHost = "Tutorial Connection";
+    CaptureScreenSize = (
+        "427",
+        "640");
+    HasAlpha = 1;
+    HotSpotX = 18;
+    HotSpotY = 20;
+    ImageDescription = <>;
+    LastKnownLocationX = 0;
+    LastKnownLocationY = 0;
+    OriginalLocationX = 34;
+    OriginalLocationY = 581;
+    Precise = 0;
+    Pulsing = 0;
+    Scale = 1;
+    SearchAlgorithm = "Adaptive";
+    SearchObjectName = "Contacts_Selected";
+    tags = ();
+}

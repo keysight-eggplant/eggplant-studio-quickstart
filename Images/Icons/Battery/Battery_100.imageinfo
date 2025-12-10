@@ -1,0 +1,19 @@
+﻿{
+    CaptureDate = "2023-09-01 19:19:09 +0000";
+    CaptureHost = "Tutorial Connection";
+    CaptureScreenSize = (
+        427,
+        640);
+    HasAlpha = 1;
+    HotSpotX = 18;
+    HotSpotY = 12;
+    LastKnownLocationX = 0;
+    LastKnownLocationY = 0;
+    OriginalLocationX = 384;
+    OriginalLocationY = 2;
+    Precise = 0;
+    Pulsing = 0;
+    Scale = 1;
+    SearchObjectName = "Icons/Battery/Battery_100";
+    tags = ();
+}

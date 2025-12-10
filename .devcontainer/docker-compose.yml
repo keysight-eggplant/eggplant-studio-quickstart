@@ -12,6 +12,7 @@ services:
       EPGW_URL: http://localhost:8080
       EPGW_USERNAME: ${GITHUB_USER}
       EPGW_PASSWORD: ${GITHUB_TOKEN}
+    env_file: ".env"
 
   # Hosts the Eggplant Fusion Engine in Debug Adapter mode in a service container
   # called fusionengine
@@ -33,7 +34,7 @@ services:
     build:
       dockerfile: Dockerfile.epgw
       context: .
-    command: service
+    command: service --enableMcp
     volumes:
       - ../connections:/root
     environment:

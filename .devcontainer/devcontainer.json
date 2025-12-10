@@ -13,6 +13,7 @@
         }
     },
     "forwardPorts": [ 8080 ],
+    "initializeCommand": "echo EPGW_AUTHENTICATION=$(echo -n ${GITHUB_USER}:${GITHUB_TOKEN} | base64) > .devcontainer/.env",
     "postAttachCommand": "./.devcontainer/post-attach.sh",
     "customizations": {
         "vscode": {

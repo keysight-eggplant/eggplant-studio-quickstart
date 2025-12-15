@@ -1,0 +1,55 @@
+name: Connection Test
+
+on:
+  workflow_dispatch:
+    inputs:
+      RDPHOSTNAME:
+        description: "RDP Hostname/IP"
+        required: true
+        default: "192.168.0.1"
+      RDPPORT:
+        description: "RDP Port"
+        required: true
+        default: "3389"
+      RDPUSERNAME:
+        description: "RDP Username"
+        required: true
+        default: "Administrator"
+
+jobs:
+  test-connection:
+    runs-on: ubuntu-latest
+    container:
+      image: quay.io/eggplantsoftware/fusion-engine-ubi8:23.5.102
+      options: --user root
+    environment: default
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+      - name: Run connection test
+        env:
+          RDPHOSTNAME: ${{ github.event.inputs.RDPHOSTNAME }}
+          RDPPORT: ${{ github.event.inputs.RDPPORT }}
+          RDPUSERNAME: ${{ github.event.inputs.RDPUSERNAME }}
+          RDPPASSWORD: ${{ secrets.RDPPASSWORD }}
+          EPF_LICENSE_KEY: ${{ secrets.EPF_LICENSE_KEY }}
+        run: |
+          # epgw does not like default github $HOME
+          export HOME=/root
+          # accept eula/privacy agreement and set up for headless execution
+          defaults write Eggplant AcceptEULA YES
+          defaults write Eggplant AcceptPrivacyAgreement YES
+          defaults write Eggplant GSBackend libgnustep-headless
+          defaults write Eggplant BonjourDiscoveryEnabled false
+          # license EPF
+          runscript -LicenseKey "$EPF_LICENSE_KEY"
+          # create a script in a suite that will capture the screen of the connected SUT
+          mkdir -p ConnectionTest.suite/Scripts
+          echo "CaptureScreen Name: \"$(pwd)/ConnectionTestScreenshot.png\"" > ConnectionTest.suite/Scripts/ConnectionTest.script
+          # run the script
+          runscript -type RDP -host $RDPHOSTNAME -port $RDPPORT -username $RDPUSERNAME -password $RDPPASSWORD ConnectionTest.suite/Scripts/ConnectionTest.script
+      - name: Upload Connection Test Screenshot Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: Connection Test Screenshot
+          path: ./ConnectionTestScreenshot.png

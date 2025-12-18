@@ -31,15 +31,14 @@ services:
   # Hosts the Eggplant Gateway in a service container
   # called epgw
   epgw:
-    build:
-      dockerfile: Dockerfile.epgw
-      context: .
+    image: "quay.io/eggplantsoftware/epgw:25.4.10-0071"
     command: service --enableMcp
     volumes:
       - ../connections:/root
     environment:
       EPGW_USERNAME: ${GITHUB_USER}
       EPGW_PASSWORD: ${GITHUB_TOKEN}
+      ASPNETCORE_Kestrel__Endpoints__Http__Url: "http://0.0.0.0:8080"
     network_mode: "service:workspace"
 volumes:
   vscode:
